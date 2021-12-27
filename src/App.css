@@ -1,0 +1,43 @@
+.wrapper{
+  width:800px;
+}
+
+.wrapper-class {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.editor-class {
+  background-color:lightgray;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+
+/* .hide-toolbar { display:none} */
+
+
+@media print{
+  body *{
+    visibility:hidden;
+  }
+  .show *{
+    visibility:visible;
+  }
+  .hide-toolbar{
+    display:none;
+  }
+  .editor-class,.wrapper-class{
+    background-color: white;
+    border:none;
+    padding:0px;
+
+  }
+  .App {
+    position: absolute;
+    left:0;
+    top:0;
+  }
+}
+
+a{
+  text-decoration: none;
+}

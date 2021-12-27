@@ -1,0 +1,14 @@
+.nav-list{
+    display:flex;
+    /* justify-content: space-around; */
+    background-color: rgb(234, 240, 154);
+    justify-content: left;
+}
+nav span{
+    padding:30px;
+    /* margin:0px 20px; */
+    /* background-color : yellow; */
+}
+nav span:hover{
+    background-color: rgb(202, 223, 84);
+}
