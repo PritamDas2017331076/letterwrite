@@ -4,83 +4,65 @@ import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { createWithContent } from 'draft-js/lib/EditorState';
+import { createWithContent, set } from 'draft-js/lib/EditorState';
 import axios from '../services/axios.js';
 import {axios as aos} from 'axios'
+import { useLocation } from 'react-router-dom';
+import { ContentState } from 'draft-js';
 const Teditor = () => {
-  
- // const id=props.location.state.id;
-  const [title,setTitle]=useState('')
- 
-
+  const {state} = useLocation();
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
-  useEffect(() => {
-    setEditorState(editorState)
-  }, [])
-  const  [convertedContent, setConvertedContent] = useState(null);
-  const handleEditorChange = (state) => {
-    setEditorState(state);
-    toDb(state)
-  }
-  const toDb = (state)=>{
-    const raw = convertToRaw(state.getCurrentContent())
-    const jsData = JSON.stringify(raw)
-    localStorage.setItem('val',jsData)
-    return jsData
-  }
-  const fromJson = (jsData)=>{
-    // const jsData = localStorage.getItem('val')
+
+  const fromDb = (jsData)=>{
     const raw = JSON.parse(jsData)
     const cState = convertFromRaw(raw)
     const eState = createWithContent(cState)
     return eState
   }
-  const convertContentToHTML = () => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(currentContentAsHTML);
-  }
-  const createMarkup = (html) => {
-    return  {
-      __html: DOMPurify.sanitize(html)
-    }
-  }
+  // const [editorState, setEditorState] = useState(fromDb(state.data));
+  // console.log('state = ',state.data)
   
-  const addTemplate = async(e)=>{
+  const fun = async ()=>{
+    const res = await axios.getTemplateById(state.templateId)
+    const dt = res.data.data
+    setEditorState(fromDb(dt))
+  }
+  useEffect(() => {
+    fun()    
+    handleEditorChange(editorState)
+  }, [])
+
+  const handleEditorChange = (state) => {
+    setEditorState(state);
+  }
+  const toDb = (state)=>{
+    const raw = convertToRaw(state.getCurrentContent())
+    const jsData = JSON.stringify(raw)
+    return jsData
+  }
+  const saveTemplate = async(e)=>{
     e.preventDefault()
-    const jsData = toDb(editorState)
-    console.log('our id: ')
-    console.log('jssssData = ',jsData)
-    const template = {
-      userId:localStorage.getItem('pre'),
-      data:jsData,
-      name:title
+    const dbData = toDb(editorState)
+    const obj = {
+      data:dbData
     }
-    const data = await axios.addTemplate(template)
+    await axios.UpdateTemplate(state.templateId,obj)
     console.log('success!');
   }
-  //console.log('hello text editor',props.location.state.id)
+  
   const loadTemplate = async (e)=>{
     e.preventDefault()
-    const jsData = await axios.getTemplates()
-    const data = jsData.data[1]
-    console.log('data = ',data)
-    const estate = fromJson(data.data)
-    console.log('estate = ',estate)
+    const templateData = await axios.getTemplateById(state.templateId)
+    console.log('templateData = ',templateData)
+    const data = templateData.data.data
+    const estate = fromDb(data)    
     setEditorState(estate)
-
   }
   //console.log('hello text editor',props.location.state.id)
   return (
     <div className="App">
-      <span>title</span>
-      <input
-        type='text'
-        placeholder='Enter Username'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        />
       <div className = 'wrapper'>
         <Editor
           editorState={editorState}
@@ -90,9 +72,9 @@ const Teditor = () => {
           toolbarClassName='hide-toolbar'
         />
       </div>
-      {/* <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}> sdfa</div> */}
       <div>
-        <button onClick ={addTemplate}>Save</button>
+        <button onClick ={loadTemplate}>load</button>
+        <button onClick = {saveTemplate}>Save</button>
       </div>
     </div>
   )

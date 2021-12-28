@@ -29,7 +29,7 @@ const Loginform = () => {
           .then(
               res => {
                   localStorage.setItem('token', res.data.token);
-                  console.log(res.data)
+                  console.log('after login data',res.data)
                   window.location.href='/'
               }
            ) 

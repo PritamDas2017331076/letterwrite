@@ -7,23 +7,24 @@ import './Header.css'
 const Header = () => {
 
     const [use, setUse] = useState('')
-
-    axios.get('http://localhost:5000/users/me',{
-        headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-    })
-    .then(res => {
-        console.log('present user exists');
-        console.log(res.data) ;
-        setUse(res.data._id);
-        localStorage.setItem('pre', use);
-        console.log('here is out user id')
-        console.log(use)
-    })
-    .catch(error => {
-        console.log('no one logged in')
-    })
+    
+    // axios.get('http://localhost:5000/users/me',{
+    //     headers: {
+    //         'Authorization': localStorage.getItem('token')
+    //       }
+    // })
+    // .then(res => {
+    //     console.log('present user exists');
+    //     console.log(res.data) ;
+    //     setUse(res.data._id);
+    //     localStorage.setItem('pre', use);
+    //     console.log('here is out user id')
+    //     console.log(use)
+    // })
+    // .catch(error => {
+    //     console.log('no one logged in')
+    // })
+    
     const logoutClick = ()=>{
         axios.get('http://localhost:5000/users/logout', {
             headers: {

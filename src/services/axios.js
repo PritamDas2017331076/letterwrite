@@ -16,8 +16,29 @@ class axios{
         return http.get('/templates')
     }
     addTemplate(data){
-        http.post('templates',data)
-    }  
+        http.post('/templates',data)
+    }
+    UpdateTemplate(id,data){
+        http.post(`/templates/${id}`,data)
+    }
+    checkName(name){
+        return http.get(`templates/name`)
+    }
+    deleteTemplate(id){
+        return http.delete(`templates/${id}`)
+    }
+    getTemplateById(id){
+        console.log('axios id = ',id)
+        return http.get(`templates/${id}`)
+    }
+    pritamFuncMe(){
+        return http.get('http://localhost:5000/users/me',{
+            headers: {
+                'Authorization': localStorage.getItem('token')
+              }
+        })
+    }
+
 }
 
 export default new axios()

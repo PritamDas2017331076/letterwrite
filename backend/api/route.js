@@ -31,9 +31,13 @@ router.route('/users/me')
 
 //router.get('/users/me', auth, RouteCtrl.apiGetCurrentUser)
 
-
-
 router.route('/templates')
     .get(RouteCtrl.apiGetTemplates)
     .post(RouteCtrl.apiAddTemplate)
+router.route('/templates/:id')
+    .delete(RouteCtrl.apiDeleteTemplate)
+    .post(RouteCtrl.apiUpdateTemplate)
+    .get(RouteCtrl.apiGetOneTemplate)
+router.route('/templates/name')
+    .get(RouteCtrl.apiCheckName)
 export default router;

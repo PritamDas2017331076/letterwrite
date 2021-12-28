@@ -101,4 +101,53 @@ export default class RouteCtrl {
             res.send(data)
         })
     }
+    static async apiUpdateTemplate(req,res){
+        const id = req.params.id
+        const text = req.body.data
+        // console.log("id = ",id)
+        console.log('text = ',text)
+        templateModel.findByIdAndUpdate(id,{data:text},(err,data)=>{
+            if(err)
+            {
+                console.log(`find id and update error ${err}`)
+                res.send('error')
+                return
+            }
+            res.send(data)
+        })
+    }
+    static async apiDeleteTemplate(req,res){
+        const id = req.params.id
+        console.log('delete id = ',id)
+        templateModel.findByIdAndDelete(id,(err,data)=>{
+            if(err){
+                console.log('error at delete ',err)
+                return
+            }
+            res.send(data)
+        })
+    }
+
+    static async apiCheckName(req,res){
+        const name = req.query.name
+        templateModel.findOne({name:name},(err,data)=>{
+            if(err){
+                console.log('error at find one in checkName')
+                return
+            }
+            res.send(data)
+        })
+    }
+    static async apiGetOneTemplate(req,res){
+        const id = req.params.id
+        console.log('db id  = ',id)
+        templateModel.findById(id,(err,data)=>{
+            if(err){
+                console.log('findbyid error')
+                return
+            }
+            console.log('data = ',data)
+            res.send(data)
+        })
+    }
 }

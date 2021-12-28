@@ -5,52 +5,33 @@ import Recordlayout from './Recordlayout'
 
 const Printmenu = () => {
     const [items,setItems] = useState([])
-    const [use, setUse] = useState('')
-    axios.get('http://localhost:5000/users/me',{
-        headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        })
-        .then(res => {
-            console.log('present USER exists');
-            console.log(res.data) ;
-            setUse(res.data._id);
-            console.log(use)
-        })
-        .catch(error => {
-            console.log('no one logged in')
-        })
+    const [use, setUse] = useState(localStorage.getItem('userId'))
+
+    console.log('user  = ',use)
+    const loadData = async ()=>{
+        const res = await aps.getTemplates()
+        console.log('loaded data = ',res)
+        return res.data
+    }
 
     useEffect(() => {
-
-      
-       
-
-        axios.get(`http://localhost:5000/api/letter-template/templates`)
-        .then(res => {
-            console.log('GOT THE WHOLE LIST OF DATA')
-            console.log(res.data) 
-            setItems(res.data)
-            console.log('LETS SEE FILTERED DATA');
-            console.log(items)
-       }) ;
+        loadData()
+        .then((res)=>{
+            // console.log('load data success',res)
+            setItems(res)
+        })
     },[]) 
     return (
         <div>
-        <div>
-                
-                {
-                   items.map(item => (
-                      
-                        <div key={item._id}>
-                       
-                        <Recordlayout dataid={item._id} userid={item.userId} name={item.name} data={item.data} />
-                        </div>
-                       
-                   ))
-                }
-                
-       </div>
+            <div>                
+            {
+                items.map(item => (            
+                    <div key={item._id}>
+                        <Recordlayout dataid={item._id} userid={item.userId} data={item.data} name = {item.name}/>
+                    </div>
+                ))
+            }   
+        </div>
        </div>
     )
 }
