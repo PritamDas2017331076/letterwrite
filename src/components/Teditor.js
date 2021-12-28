@@ -6,7 +6,13 @@ import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { createWithContent } from 'draft-js/lib/EditorState';
 import axios from '../services/axios.js';
+import {axios as aos} from 'axios'
 const Teditor = () => {
+  
+ // const id=props.location.state.id;
+  const [title,setTitle]=useState('')
+ 
+
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty(),
   );
@@ -40,17 +46,21 @@ const Teditor = () => {
       __html: DOMPurify.sanitize(html)
     }
   }
+  
   const addTemplate = async(e)=>{
     e.preventDefault()
     const jsData = toDb(editorState)
-    console.log('jsData = ',jsData)
+    console.log('our id: ')
+    console.log('jssssData = ',jsData)
     const template = {
-      userId:"61c9a3787446b48ff058b3fb",
-      data:jsData
+      userId:localStorage.getItem('pre'),
+      data:jsData,
+      name:title
     }
     const data = await axios.addTemplate(template)
     console.log('success!');
   }
+  //console.log('hello text editor',props.location.state.id)
   const loadTemplate = async (e)=>{
     e.preventDefault()
     const jsData = await axios.getTemplates()
@@ -61,8 +71,16 @@ const Teditor = () => {
     setEditorState(estate)
 
   }
+  //console.log('hello text editor',props.location.state.id)
   return (
     <div className="App">
+      <span>title</span>
+      <input
+        type='text'
+        placeholder='Enter Username'
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        />
       <div className = 'wrapper'>
         <Editor
           editorState={editorState}
@@ -74,7 +92,7 @@ const Teditor = () => {
       </div>
       {/* <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}> sdfa</div> */}
       <div>
-        <button onClick ={loadTemplate}>Save</button>
+        <button onClick ={addTemplate}>Save</button>
       </div>
     </div>
   )
