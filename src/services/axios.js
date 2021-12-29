@@ -33,13 +33,16 @@ class axios{
         return http.get(`templates/${id}`)
     }
     pritamFuncMe(){
-        return http.get('http://localhost:5000/users/me',{
+        return http.get('users/me',{
             headers: {
                 'Authorization': localStorage.getItem('token')
               }
         })
     }
-
+    getTemplateUser(id){
+        console.log('axios user',id)
+        return http.get(`usertemplate?id=${id}`)
+    }
 }
 
 export default new axios()

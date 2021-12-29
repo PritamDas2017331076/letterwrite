@@ -13,7 +13,7 @@ const Titleform = () => {
             const data = await axios.addTemplate(obj)
             console.log('unique!')
             console.log('added template data',data)
-            // window.location.href = '/home'
+            window.location.href = '/home'
         }
         else{
             alert('name exists')

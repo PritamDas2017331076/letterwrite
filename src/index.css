@@ -9,11 +9,3 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.item {
-    position: relative;
-    background-color: rgb(217, 236, 240);
-    padding: 40px;
-    margin: 20px 35px;
-    width: 600px;
-    font-size: large;
-}
