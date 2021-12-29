@@ -130,6 +130,7 @@ export default class RouteCtrl {
 
     static async apiCheckName(req,res){
         const name = req.query.name
+        console.log('name = ',name)
         templateModel.findOne({name:name},(err,data)=>{
             if(err){
                 console.log('error at find one in checkName')

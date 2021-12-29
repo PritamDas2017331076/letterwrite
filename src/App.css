@@ -41,3 +41,50 @@
 a{
   text-decoration: none;
 }
+.item {
+  position: relative;
+  background-color: rgb(217, 236, 240);
+  padding: 40px;
+  margin: 20px 35px;
+  width: 200px;
+  font-size: large;
+}
+
+
+.form-signup{
+  position:absolute;
+  top:100px;
+  left:200px;
+}
+.form-login{
+  position:absolute;
+  top:100px;
+  left:200px;
+}
+.form-header{
+  font-size:20px;
+  color:rgb(114, 212, 48);
+  margin:0px 130px;
+}
+
+#add-new-template{
+  background-color:rgb(141, 250, 137);
+  padding:20px;
+  position:absolute;
+  right:300px;
+  top:140px;
+  border-radius:10px;
+}
+#add-new-template:hover{
+  background-color: rgb(32, 155, 73);
+  color:rgb(2, 65, 31);
+}
+
+#saved-header{
+  font-size:22px;
+  width:1000px;
+  padding:10px;
+  margin:0px 20px;
+  margin-top:50px;
+  background-color: rgb(145, 162, 165);
+}

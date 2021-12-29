@@ -69,6 +69,8 @@ const Signupform = () => {
 
 
     return (
+      <div className = 'form-signup'>
+        <p className = 'form-header'>Signup Form</p>
         <div className = 'form-wrapper'>
             <form className='form' onSubmit={onSubmit} >
               <input
@@ -106,6 +108,7 @@ const Signupform = () => {
              <button type='submit' value='sign up'>Submit </button>
         </form>
         </div>
+      </div>
     )
 }
 

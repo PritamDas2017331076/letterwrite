@@ -19,14 +19,16 @@ const Recordlayout = ({dataid,userid,data,name}) => {
     const deleteTemplate = async (e)=>{
         e.preventDefault()
         await axios.deleteTemplate(dataid)
+        window.location.href = '/home'
+        console.log('delete after')
     }
     return (
         <div>
-
-            <div className="item" onClick = {handleClick}>
-                <div>{name}</div>
+            <div className="item" >
+                <p className = 'template-name'>{name}</p>
+            <button onClick = {deleteTemplate} id = 'bt-delete'>delete</button>
+            <button onClick = {handleClick} id = 'bt-edit'>edit</button>
             </div>
-            <button onClick = {deleteTemplate}>delete</button>
         </div>
     )
 }

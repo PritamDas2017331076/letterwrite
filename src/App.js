@@ -7,13 +7,14 @@ import Teditor from './components/Teditor.js'
 import Signupform from './components/Signupform'
 import Home from './components/Home'
 import Titleform from './components/Titleform'
+import Loginform from "./components/Loginform";
+import './App.css'
 const App  = ()=>{
   return (
     <div className="App">
     <Router>
       <Header/>
       <Routes>
-      
         <Route
           exact
           path="/" element={<Home/>} 
@@ -33,6 +34,7 @@ const App  = ()=>{
         <Route
           path="/titleform" element={<Titleform/>} 
         />
+        <Route path  = 'login' element = {<Loginform/>}/>
         </Routes>
     </Router>
     </div>

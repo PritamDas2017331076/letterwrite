@@ -16,13 +16,14 @@ class axios{
         return http.get('/templates')
     }
     addTemplate(data){
-        http.post('/templates',data)
+        return http.post('/templates',data)
     }
     UpdateTemplate(id,data){
         http.post(`/templates/${id}`,data)
     }
     checkName(name){
-        return http.get(`templates/name`)
+        console.log('check name axios',name)
+        return http.get(`templateName?name=${name}`)
     }
     deleteTemplate(id){
         return http.delete(`templates/${id}`)

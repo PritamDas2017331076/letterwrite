@@ -11,17 +11,16 @@ const Home = () => {
     const [use, setUse] = useState()
     const func = ()=>{
         aps.pritamFuncMe()
-        .then(res=>{
-            console.log('home res = ',res.data)
-            // setUse(res.data._id)
-            localStorage.setItem('userId',use)
+        .then(res=>{            
             setUse(res.data._id)
+            console.log('localStorage',localStorage.getItem('userId'))
         })
     }
     useEffect(() => {
         func()
+        console.log('use = ',use)
     }, [])
-    console.log('use = ',use)
+    // console.log('use = ',use)
     
     // axios.get('http://localhost:5000/users/me',{
     //     headers: {
@@ -38,28 +37,18 @@ const Home = () => {
     // .catch(error => {
     //     console.log('no one logged in')
     // })
+
+    // console.log('local',localStorage.getItem('userId'))
     const RenderMenu = () => {
-        if(use==''){
-            return(
-                <div >
-                
-                    <div>
-                        <Loginform/>
-                    </div>
-                
-                </div>
-            )
-        }
-        else{
-            return(
-                <div>
-                    <span><Link to={{
-                     pathname: '/titleform',            
-                    }} >add template</Link></span>
-                    <Printmenu/> 
-                </div>
-            )
-        }
+        return(
+            <div>
+                <span id = 'add-new-template'><Link to = '/titleform'  state = {{id:use}}> add new template</Link></span>
+                <p id = 'saved-header'>Your saved templates:</p>
+
+                <Printmenu/> 
+            </div>
+        )
+    
 
     }
     return (

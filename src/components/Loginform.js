@@ -2,10 +2,14 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import axios from 'axios'
 import './Loginform.css'
+import { useLocation } from 'react-router-dom'
 const Loginform = () => {
     const [user, setUser] = useState('')
     const [password, setPass] = useState('')
-
+    const location = useLocation()
+	const cur = location.state
+	
+    console.log('cur = ',cur)
     const onSubmit = (e) => {
         e.preventDefault()
 
@@ -29,7 +33,10 @@ const Loginform = () => {
           .then(
               res => {
                   localStorage.setItem('token', res.data.token);
-                  console.log('after login data',res.data)
+                  localStorage.setItem('userId',res.data.userr._id)
+                //   console.log('login-> data = ',res.data)
+                  console.log('after login data',res.data.userr._id)
+                  console.log('local storage ',localStorage.getItem('userId'))
                   window.location.href='/'
               }
            ) 
@@ -43,8 +50,9 @@ const Loginform = () => {
         
     }
     return (
+        <div className = 'form-login'>
+        <p className = 'form-header'>Login Form</p>
         <div className = 'form-wrapper'>
-            <p className = 'login-header'>Login Form</p>
             <form  className = 'form' onSubmit={onSubmit}>
 
                 <div>
@@ -65,6 +73,7 @@ const Loginform = () => {
                 </div>  
                 <button type='submit' value='login'>Login</button>
             </form>
+        </div>
         </div>
     )
 }

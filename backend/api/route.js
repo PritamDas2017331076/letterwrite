@@ -38,6 +38,6 @@ router.route('/templates/:id')
     .delete(RouteCtrl.apiDeleteTemplate)
     .post(RouteCtrl.apiUpdateTemplate)
     .get(RouteCtrl.apiGetOneTemplate)
-router.route('/templates/name')
+router.route('/templateName')
     .get(RouteCtrl.apiCheckName)
 export default router;

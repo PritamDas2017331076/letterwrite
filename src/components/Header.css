@@ -6,9 +6,16 @@
 }
 nav span{
     padding:30px;
+    /* color:black; */
     /* margin:0px 20px; */
     /* background-color : yellow; */
 }
 nav span:hover{
     background-color: rgb(202, 223, 84);
+}
+#logout{
+    cursor:pointer;
+}
+a{
+    color:black;
 }

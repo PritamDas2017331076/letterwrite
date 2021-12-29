@@ -1,8 +1,25 @@
 import React,{useState} from 'react'
 import axios from '../services/axios.js';
+import {useLocation} from 'react-router-dom'
 const Titleform = () => {
+    const location = useLocation()
+    const cur = location.state
+    // console.log('cur state = ',cur)
     const [title,setTitle]=useState('')
-    const onSubmit = (e) => {
+    const addTemplate = async (obj)=>{
+        const res = await axios.checkName(obj.name)
+        console.log('res = ',res.data)
+        if(!res.data){
+            const data = await axios.addTemplate(obj)
+            console.log('unique!')
+            console.log('added template data',data)
+            // window.location.href = '/home'
+        }
+        else{
+            alert('name exists')
+        }
+    }
+    const onSubmit = async (e) => {
         e.preventDefault()
         if(!title){
             alert('Please enter title')
@@ -10,12 +27,12 @@ const Titleform = () => {
         }
         /* onAdd({user,email,password,passwordr}) */
         const templateDetails = {
-            userId: localStorage.getItem('pre'),
+            userId: cur.id,
             data:'',
             name:title
           }
-          const data = axios.addTemplate(templateDetails)
-          console.log('success!');        
+          console.log('templateDetails = ',templateDetails)
+          await addTemplate(templateDetails)
     }
     return (
         <div>
