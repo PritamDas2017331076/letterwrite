@@ -32,11 +32,12 @@ const Loginform = () => {
         axios.post('http://localhost:5000/users/login',userDetails)
           .then(
               res => {
+                  console.log('data in login form ',res.data)
                   localStorage.setItem('token', res.data.token);
-                  localStorage.setItem('userId',res.data.userr._id)
+                  localStorage.setItem('userId',res.data.user)
                 //   console.log('login-> data = ',res.data)
-                  console.log('after login data',res.data.userr._id)
-                  console.log('local storage ',localStorage.getItem('userId'))
+                  console.log('after login data',res.data.user)
+                  console.log('local storage loginform ',localStorage.getItem('userId'))
                   window.location.href='/'
               }
            ) 

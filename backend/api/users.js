@@ -24,30 +24,31 @@ router.post('/add', async(req, res) => {
     console.log('here is result')
     console.log(req.body)
 
-    try {
-        User.findOne({ user: user }, function(err, user) {
+    // try {
+    //     User.findOne({ user: user }, function(err, user) {
 
-            console.log("user is ", user);
-            console.log('we are here')
-            if (user) console.log('fine one lol')
+    //         console.log("user is ", user);
+    //         console.log('we are here')
+    //         if (user) console.log('fine one lol')
 
 
-            if (user) {
-                console.log('just stop it')
-                console.log('This user is used')
-                alert('User is used')
-                return
-            }
-        })
-    } catch {
-        console.log('user is used')
-    }
+    //         if (user) {
+    //             console.log('just stop it')
+    //             console.log('This user is used')
+    //             alert('User is used')
+    //             return
+    //         }
+    //     })
+    // } catch {
+    //     console.log('user is used')
+    // }
 
     const newUser = new User({ user, email, password });
     console.log(newUser)
 
     try {
         const token = await newUser.generateAuthToken();
+        console.log("token in api", token)
         res.status(200).send({ newUser, token })
     } catch (e) {
         res.status(400).send(e);

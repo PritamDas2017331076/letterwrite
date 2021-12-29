@@ -8,11 +8,11 @@ import { useState ,useEffect} from 'react'
 import './Header.css'
 
 const Home = () => {
-    const [use, setUse] = useState()
+    const [use, setUse] = useState('')
     const func = ()=>{
         aps.pritamFuncMe()
         .then(res=>{            
-            setUse(res.data._id)
+            setUse(res.data.user)
             console.log('localStorage',localStorage.getItem('userId'))
         })
     }
@@ -40,6 +40,12 @@ const Home = () => {
 
     // console.log('local',localStorage.getItem('userId'))
     const RenderMenu = () => {
+        if(use==''){
+            return(
+                <div>Login first</div>
+            )
+        }
+        else{
         return(
             <div>
                 <span id = 'add-new-template'><Link to = '/titleform'  state = {{id:use}}> add new template</Link></span>
@@ -48,6 +54,7 @@ const Home = () => {
                 <Printmenu/> 
             </div>
         )
+        }
     
 
     }

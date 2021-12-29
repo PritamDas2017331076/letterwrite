@@ -7,14 +7,26 @@ import './Header.css'
 const Header = () => {
 
     const [use, setUse] = useState("")
+    axios.get('http://localhost:5000/users/me',{
+        headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+    })
+    .then(res => {
+        console.log('present user exists');
+        console.log(res.data) ;
+        setUse(res.data.user);
+        console.log(use)
+    })
+    .catch(error => {
+        console.log('no one logged in')
+    })
     
-    useEffect(() => {
-        setUse(localStorage.getItem('userId'))
-        console.log('use header = ',use)
-    }, [])
-    const login = ()=>{
-        console.log('header login')
-    }
+    // useEffect(() => {
+    //     setUse(localStorage.getItem('userId'))
+    //     console.log('use header = ',use)
+    // }, [])
+    
     const logoutClick = ()=>{
         axios.get('http://localhost:5000/users/logout', {
             headers: {
@@ -23,22 +35,25 @@ const Header = () => {
           })
         .then(
             res => {
-                // localStorage.setItem('token', '1a');
-                // localStorage.setItem('state','')
-                localStorage.clear()
+                 localStorage.setItem('token', '1a');
+                 localStorage.setItem('userId','')
+               // localStorage.clear()
+                console.log('Here is previous user')
                 console.log(res.data)
                 window.location.href = "/login";
             }
          ) 
          .catch(err =>{
-             console.log(err)
+            localStorage.setItem('token', '1a');
+            localStorage.setItem('userId','')
+             console.log('logout error :',err)
          })
     }
     // console.log('local at header = ',localStorage.getItem('userId'))
     if(!localStorage.getItem('userId'))
         console.log('locals true')
     const RenderMenu = () => {
-        if(!localStorage.getItem('userId')){
+        if(use==''){
             return(
                 <nav >
                 <div>
