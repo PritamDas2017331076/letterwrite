@@ -1,45 +1,49 @@
 import http from '../http-common.js'
 
-class axios{
-    getUsers(){
+class axios {
+    getUsers() {
         console.log('axios get all users')
         return http.get('/users')
     }
-    addUser(user){
+    addUser(user) {
         console.log('axios add a user')
-        return http.post('/users',user)
+        return http.post('/users', user)
     }
-    getOneUser(id){
+    getOneUser(id) {
         return http.get(`/users/${id}`)
     }
-    getTemplates(){
+    getTemplates() {
         return http.get('/templates')
     }
-    addTemplate(data){
-        return http.post('/templates',data)
+    addTemplate(data) {
+        return http.post('/templates', data)
     }
-    UpdateTemplate(id,data){
-        http.post(`/templates/${id}`,data)
+    UpdateTemplate(id, data) {
+        http.post(`/templates/${id}`, data)
     }
-    checkName(name){
-        console.log('check name axios',name)
+    checkName(name) {
+        console.log('check name axios', name)
         return http.get(`templateName?name=${name}`)
     }
-    deleteTemplate(id){
+    deleteTemplate(id) {
         return http.delete(`templates/${id}`)
     }
-    getTemplateById(id){
-        console.log('axios id = ',id)
+    getTemplateById(id) {
+        console.log('axios id = ', id)
         return http.get(`templates/${id}`)
     }
-    pritamFuncMe(){
-        return http.get('http://localhost:5000/users/me',{
+    pritamFuncMe() {
+        return http.get('users/me', {
             headers: {
-                'Authorization': localStorage.getItem('token')
-              }
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    // "Bearer "+"token"
+            }
         })
     }
-
+    getTemplateUser(id) {
+        console.log('axios user', id)
+        return http.get(`usertemplate?id=${id}`)
+    }
 }
 
 export default new axios()

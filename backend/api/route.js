@@ -40,4 +40,6 @@ router.route('/templates/:id')
     .get(RouteCtrl.apiGetOneTemplate)
 router.route('/templateName')
     .get(RouteCtrl.apiCheckName)
+router.route('/usertemplate')
+    .get(RouteCtrl.apiGetTemplateUser)
 export default router;

@@ -9,34 +9,35 @@ import './Header.css'
 
 const Home = () => {
     const [use, setUse] = useState('')
-    const func = ()=>{
-        aps.pritamFuncMe()
-        .then(res=>{            
-            setUse(res.data.user)
-            console.log('localStorage',localStorage.getItem('userId'))
-        })
-    }
-    useEffect(() => {
-        func()
-        console.log('use = ',use)
-    }, [])
+    // const func = ()=>{
+    //     aps.pritamFuncMe()
+    //     .then(res=>{            
+
+    //         setUse(res.data.user)
+    //         console.log('localStorage',localStorage.getItem('userId'))
+    //     })
+    // }
+    // useEffect(() => {
+    //     func()
+    //     console.log('use = ',use)
+    // }, [])
     // console.log('use = ',use)
     
-    // axios.get('http://localhost:5000/users/me',{
-    //     headers: {
-    //         'Authorization': localStorage.getItem('token')
-    //       }
-    // })
-    // .then(res => {
-    //     console.log('present user exists');
-    //     console.log(res.data) ;
-    //     setUse(res.data._id);
-    //     console.log('here is out user id')
-    //     console.log(use)
-    // })
-    // .catch(error => {
-    //     console.log('no one logged in')
-    // })
+    axios.get('http://localhost:5000/users/me',{
+        headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+    })
+    .then(res => {
+        console.log('present user exists');
+        console.log(res.data) ;
+        setUse(res.data.user);
+        console.log('here is out user id')
+        console.log(use)
+    })
+    .catch(error => {
+        console.log('no one logged in')
+    })
 
     // console.log('local',localStorage.getItem('userId'))
     const RenderMenu = () => {

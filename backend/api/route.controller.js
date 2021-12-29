@@ -151,4 +151,14 @@ export default class RouteCtrl {
             res.send(data)
         })
     }
+    static async apiGetTemplateUser(req,res){
+        const id = req.query.id
+        console.log('get template for user',id)
+        templateModel.find({userId:id},(err,data)=>{
+            if(err){
+                console.log('find template for user error',err)
+            }
+            res.send(data)
+        })
+    }
 }

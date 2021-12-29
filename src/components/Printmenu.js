@@ -9,7 +9,7 @@ const Printmenu = () => {
 
     console.log('user  = ',use)
     const loadData = async ()=>{
-        const res = await aps.getTemplates()
+        const res = await aps.getTemplateUser(use)
         console.log('loaded data = ',res)
         return res.data
     }
