@@ -30,10 +30,11 @@ const Home = () => {
     })
     .then(res => {
         console.log('present user exists');
-        console.log(res.data) ;
-        setUse(res.data.user);
-        console.log('here is out user id')
-        console.log(use)
+        // console.log(res.data) ;
+        setUse(res.data._id);
+        // console.log('res = ',res.data)
+        console.log('here is out user id',use)
+        // console.log(use)
     })
     .catch(error => {
         console.log('no one logged in')
@@ -52,7 +53,7 @@ const Home = () => {
                 <span id = 'add-new-template'><Link to = '/titleform'  state = {{id:use}}> add new template</Link></span>
                 <p id = 'saved-header'>Your saved templates:</p>
 
-                <Printmenu/> 
+                <Printmenu userId={use}/> 
             </div>
         )
         }

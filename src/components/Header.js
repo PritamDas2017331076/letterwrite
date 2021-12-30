@@ -13,10 +13,10 @@ const Header = () => {
           }
     })
     .then(res => {
-        console.log('present user exists');
-        console.log(res.data) ;
+        // console.log('present user exists');
+        // console.log(res.data) ;
         setUse(res.data.user);
-        console.log(use)
+        // console.log(use)
     })
     .catch(error => {
         console.log('no one logged in')
