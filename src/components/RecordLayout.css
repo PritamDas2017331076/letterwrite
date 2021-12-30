@@ -1,0 +1,35 @@
+.item{
+    width:100px;
+    height:100px;
+}
+.item:hover{
+    background-color: rgb(13, 167, 167);
+    color:rgb(18, 253, 116);
+}
+
+#bt-delete{
+    color:black;
+    background-color: rgb(223, 136, 102);
+    position:relative;
+    left:110px;
+    bottom:36px;
+    z-index: 2;
+    cursor:pointer;
+}
+#bt-delete:hover{
+    background-color: rgb(173, 18, 18);
+    color:white;
+}
+#bt-edit{
+    cursor:pointer;
+    position:relative;
+    left:30px;
+}
+#bt-edit:hover{
+    background-color: rgb(40, 26, 243);
+    color:white;
+}
+.template-name{
+    position:relative;
+    top:65px
+}
