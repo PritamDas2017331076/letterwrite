@@ -47,9 +47,11 @@ const Signupform = () => {
 
          axios.post('http://localhost:5000/users/add',userDetails)
           .then(res => {
-            console.log(res.data)
-            console.log(res.data.token)
+            console.log('data signupform ', res.data)
+            console.log('new user data signupform ', res.data.newUser)
+            console.log('token signupform ', res.data.token)
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('userId',res.data.newUser._id)
             window.location.href='/'
           })
           .catch((error) => {

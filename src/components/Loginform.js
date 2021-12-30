@@ -34,9 +34,10 @@ const Loginform = () => {
               res => {
                   console.log('data in login form ',res.data)
                   localStorage.setItem('token', res.data.token);
-                  localStorage.setItem('userId',res.data.user)
+                  localStorage.setItem('userId',res.data.userr._id)
                 //   console.log('login-> data = ',res.data)
-                  console.log('after login data',res.data.user)
+                 // console.log()
+                  console.log('after login data',res.data)
                   console.log('local storage loginform ',localStorage.getItem('userId'))
                   window.location.href='/'
               }

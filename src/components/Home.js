@@ -23,22 +23,29 @@ const Home = () => {
     // }, [])
     // console.log('use = ',use)
     
-    axios.get('http://localhost:5000/users/me',{
-        headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-    })
-    .then(res => {
-        console.log('present user exists');
-        // console.log(res.data) ;
-        setUse(res.data._id);
-        // console.log('res = ',res.data)
-        console.log('here is out user id',use)
-        // console.log(use)
-    })
-    .catch(error => {
-        console.log('no one logged in')
-    })
+    // axios.get('http://localhost:5000/users/me',{
+    //     headers: {
+    //         'Authorization': localStorage.getItem('token')
+    //       }
+    // })
+    // .then(res => {
+    //     console.log('present user exists');
+    //     // console.log(res.data) ;
+    //     setUse(res.data._id);
+    //     // console.log('res = ',res.data)
+    //     console.log('here is out user id',use)
+    //     // console.log(use)
+    // })
+    // .catch(error => {
+    //     console.log('no one logged in')
+    // })
+
+    console.log('local data home ',localStorage.getItem('userId'))
+    
+    useEffect(() => {
+        setUse(localStorage.getItem('userId'))
+        console.log('use header = ',use)
+    }, [])
 
     // console.log('local',localStorage.getItem('userId'))
     const RenderMenu = () => {
